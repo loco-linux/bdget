@@ -14,10 +14,14 @@ RUN mvn clean package
 
 FROM eclipse-temurin:22-jdk 
 
-COPY --from=buildstage /app/target/instagram-0.0.1-SNAPSHOT.jar /app/instagram.jar
+COPY --from=buildstage /app/target/bdget-0.0.1-SNAPSHOT.jar /app/bdget.jar
 
 COPY Wallet_N72BZHZWYZGTE7OH /app/wallet
-ENTRYPOINT [ "java", "-jar","/app/instagram.jar" ]
+
+ENV TNS_ADMIN=/app/wallet
+EXPOSE 8080
+
+ENTRYPOINT [ "java", "-jar","/app/bdget.jar" ]
 
 
 
