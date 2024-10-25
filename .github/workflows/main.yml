@@ -43,6 +43,14 @@ jobs:
           aws-region: us-east-1  # Cambia a tu región
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}  # Añadido aquí
 
+      # Paso 5.5: 
+      - name: Add SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+
       # Paso 6: Conectarse a EC2 y desplegar el contenedor
       - name: Deploy Docker Image on EC2
         uses: appleboy/ssh-action@v0.1.4
