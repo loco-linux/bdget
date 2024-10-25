@@ -52,13 +52,9 @@ jobs:
 
 
       # Paso 6: Conectarse a EC2 y desplegar el contenedor
-      - name: Deploy Docker Image on EC2
-        uses: appleboy/ssh-action@v0.1.4
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ec2-user  # Asegúrate de usar el usuario correcto
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
+      - name: SSH commands to deploy
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ secrets.USER_SERVER }}@${{ secrets.EC2_HOST }} << 'EOF'
             # Autenticar en DockerHub desde EC2
             echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
             # Descargar la última versión de la imagen
@@ -67,4 +63,5 @@ jobs:
             docker stop my-app || true && docker rm my-app || true
             # Iniciar el contenedor
             docker run -d --name my-app -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+            EOF
   
