@@ -34,7 +34,7 @@ jobs:
          sed -i "s|<db_url>|$db_url_escaped|" src/main/resources/application.properties
         shell: bash
       - name: chequeo secretos
-        run: echo "secrets.DB_URL"
+        run: echo "${secrets.DB_URL}"
 
       # Paso 2: Autenticar en DockerHub 
       - name: Log in to DockerHub
