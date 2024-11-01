@@ -34,7 +34,7 @@ jobs:
          sed -i "s|<db_url>|$db_url_escaped|" src/main/resources/application.properties
         shell: bash
 
-      # Paso 2: Autenticar en DockerHub
+      # Paso 2: Autenticar en DockerHub 
       - name: Log in to DockerHub
         uses: docker/login-action@v2 
         with:
