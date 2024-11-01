@@ -25,13 +25,13 @@ jobs:
         shell: bash
       - name: Update db username 
         run: |
-         db_url_escaped=$(printf '%s\n' "${{ secrets.DB_USERNAME }}" | sed 's/[&/\]/\\&/g')
-         sed -i "s|<db_url>|$db_url_escaped|" src/main/resources/application.properties
+         db_username_escaped=$(printf '%s\n' "${{ secrets.DB_USERNAME }}" | sed 's/[&/\]/\\&/g')
+         sed -i "s|<db_username>|$db_username_escaped|" src/main/resources/application.properties
         shell: bash
       - name: Update db password 
         run: |
-         db_url_escaped=$(printf '%s\n' "${{ secrets.DB_PASSWORD }}" | sed 's/[&/\]/\\&/g')
-         sed -i "s|<db_url>|$db_url_escaped|" src/main/resources/application.properties
+         db_password_escaped=$(printf '%s\n' "${{ secrets.DB_PASSWORD }}" | sed 's/[&/\]/\\&/g')
+         sed -i "s|<db_password>|$db_password_escaped|" src/main/resources/application.properties
         shell: bash
       - name: chequeo secretos
         run: echo ${{secrets.DB_URL}} | sed 's/./& /g'
