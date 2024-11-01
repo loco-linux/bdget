@@ -19,11 +19,11 @@ jobs:
 
       # Paso 1.5: carga secretos en el application.properties
       - name: Update db url
-        run: sed -i 's/<db_url>/${{ secrets.DB_URL }}/' src/main/resources/application.properties
+        run: sed -i "s/<db_url>/${{ secrets.DB_URL }}/" src/main/resources/application.properties
       - name: Update db username
-        run: sed -i 's/<db_username>/${{ secrets.DB_USERNAME }}/' src/main/resources/application.properties
+        run: sed -i "s/<db_username>/${{ secrets.DB_USERNAME }}/" src/main/resources/application.properties
       - name: Update db password
-        run: sed -i 's/<db_password>/${{ secrets.DB_PASSWORD }}/' src/main/resources/application.properties
+        run: sed -i "s/<db_password>/${{ secrets.DB_PASSWORD }}/" src/main/resources/application.properties
 
       # Paso 2: Autenticar en DockerHub
       - name: Log in to DockerHub
