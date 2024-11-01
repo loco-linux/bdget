@@ -23,10 +23,16 @@ jobs:
          db_url_escaped=$(printf '%s\n' "${{ secrets.DB_URL }}" | sed 's/[&/\]/\\&/g')
          sed -i "s|<db_url>|$db_url_escaped|" src/main/resources/application.properties
         shell: bash
-      - name: Update db username
-        run: sed -i "s/<db_username>/${{ secrets.DB_USERNAME }}|" src/main/resources/application.properties
-      - name: Update db password
-        run: sed -i "s/<db_password>/${{ secrets.DB_PASSWORD }}|" src/main/resources/application.properties
+      - name: Update db username 
+        run: |
+         db_url_escaped=$(printf '%s\n' "${{ secrets.DB_USERNAME }}" | sed 's/[&/\]/\\&/g')
+         sed -i "s|<db_url>|$db_url_escaped|" src/main/resources/application.properties
+        shell: bash
+      - name: Update db password 
+        run: |
+         db_url_escaped=$(printf '%s\n' "${{ secrets.DB_PASSWORD }}" | sed 's/[&/\]/\\&/g')
+         sed -i "s|<db_url>|$db_url_escaped|" src/main/resources/application.properties
+        shell: bash
 
       # Paso 2: Autenticar en DockerHub
       - name: Log in to DockerHub
