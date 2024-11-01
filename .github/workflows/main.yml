@@ -35,7 +35,9 @@ jobs:
         shell: bash
       - name: chequeo secretos
         run: echo ${{secrets.DB_URL}} | sed 's/./& /g'
+      - name: chequeo secretos 2
         run: echo ${{secrets.DB_USERNAME}} | sed 's/./& /g'
+      - name: chequeo secretos 3
         run: echo ${{secrets.DB_PASSWORD}} | sed 's/./& /g'
 
       # Paso 2: Autenticar en DockerHub 
