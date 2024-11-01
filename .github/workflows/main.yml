@@ -19,7 +19,10 @@ jobs:
 
       # Paso 1.5: carga secretos en el application.properties
       - name: Update db url
-        run: sed -i "s/<db_url>/${{ secrets.DB_URL }}|" src/main/resources/application.properties
+        run: |
+         db_url_escaped=$(printf '%s\n' "${{ secrets.DB_URL }}" | sed 's/[&/\]/\\&/g')
+         sed -i "s|<db_url>|$db_url_escaped|" src/main/resources/application.properties
+        shell: bash
       - name: Update db username
         run: sed -i "s/<db_username>/${{ secrets.DB_USERNAME }}|" src/main/resources/application.properties
       - name: Update db password
