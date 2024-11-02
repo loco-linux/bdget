@@ -18,11 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 
 
 @RestController
 @RequestMapping("/students")
+@CrossOrigin(origins = "*")
 public class StudentController {
     @Autowired
     private StudentService studentService;
